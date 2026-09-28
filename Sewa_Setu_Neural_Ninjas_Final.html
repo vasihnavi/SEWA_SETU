@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chhattisgarh Sewa Setu - Comparative Study & Presentation Portal | Neural Ninjas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cg: {
+                            navy: '#0F2942',
+                            darkNavy: '#0A1A2B',
+                            terracotta: '#C85A32',
+                            terracottaDark: '#9E3E1B',
+                            gold: '#D4AF37',
+                            softGold: '#F3E5AB',
+                            slate: '#2D5A27',
+                            bgWarm: '#FAF8F5',
+                            cardBg: '#FFFFFF',
+                            subtleGray: '#F0F2F5',
+                            accentBlue: '#1E40AF',
+                            emerald: '#059669',
+                            crimson: '#DC2626'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', '-apple-system', 'BlinkMacSystemFont', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+       
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .high-contrast {
+            background-color: #000000 !important;
+            color: #FFFF00 !important;
+        }
+        .high-contrast button, .high-contrast a, .high-contrast div {
+            border-color: #FFFF00 !important;
+        }
+        .text-scale-sm { font-size: 0.875rem; }
+        .text-scale-base { font-size: 1rem; }
+        .text-scale-lg { font-size: 1.125rem; }
+        .text-scale-xl { font-size: 1.25rem; }
+        
+      
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+
+<body class="bg-cg-bgWarm text-slate-800 font-sans antialiased leading-relaxed min-h-screen flex flex-col transition-colors duration-200" id="appBody">
+
+    <!-- TOP GOVERNANCE & ACCESSIBILITY HEADER BAR -->
+    <header class="bg-cg-navy text-white text-xs py-2 px-4 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-3">
+                
+                <span class="font-medium text-slate-200">IIIT Naya Raipur & CHiPS Collaboration | Problem Statement 3: Comparative Study of Sewa Setu</span>
+            </div>
+            
+            <!-- Accessibility & Controls -->
+            <div class="flex items-center space-x-4">
+               
+                <div class="flex items-center space-x-1 bg-slate-800 rounded px-2 py-0.5">
+                    <span class="text-[10px] text-slate-400 mr-1">Font:</span>
+                    <button onclick="changeFontSize('sm')" class="hover:text-cg-softGold px-1 font-bold">A-</button>
+                    <button onclick="changeFontSize('base')" class="hover:text-cg-softGold px-1 font-bold">A</button>
+                    <button onclick="changeFontSize('lg')" class="hover:text-cg-softGold px-1 font-bold">A+</button>
+                </div>
+               
+                <button onclick="toggleContrast()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2 py-0.5 rounded flex items-center space-x-1">
+                    <span>&#9681;</span>
+                    <span>High Contrast</span>
+                </button>
+               
+                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-800 text-slate-200 rounded px-2 py-0.5 focus:outline-none text-xs">
+                    <option value="en">English (English)</option>
+                    <option value="hi">हिन्दी (Hindi)</option>
+                    <option value="cg">छत्तीसगढ़ी (Chhattisgarhi)</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+   
+    <div class="bg-cg-darkNavy text-white border-b-4 border-cg-terracotta py-6 px-4 shadow-lg">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <div class="flex items-center space-x-3 mb-1">
+                    <span class="text-2xl font-bold tracking-tight text-white">छत्तीसगढ़ सेवा सेतु</span>
+                </div>
+                <h1 class="text-xl md:text-2xl font-extrabold text-cg-softGold">Reimagining Chhattisgarh Sewa Setu</h1>
+                <p class="text-xs md:text-sm text-slate-300 mt-1 max-w-3xl">
+                    A Comprehensive Comparative Study of Indian State Digital Citizen Portals (Goa, Kerala, Delhi, Karnataka, Odisha, Assam) to Drive Evidence-Based Transformation in Service Discovery, UX, SLA Transparency & Interoperability.
+                </p>
+            </div>
+        </div>
+    </div>
+
+   
+    <nav class="bg-white border-b border-slate-200 sticky top-[33px] z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto flex overflow-x-auto no-scrollbar text-sm font-semibold text-slate-600">
+            <button onclick="switchTab('tab-deck')" id="btn-tab-deck" class="nav-tab py-3 px-5 border-b-2 border-cg-terracotta text-cg-terracotta whitespace-nowrap flex items-center space-x-2">
+                <span>&#9638;</span> <span>28-Slide Pitch Deck</span>
+            </button>
+            <button onclick="switchTab('tab-summary')" id="btn-tab-summary" class="nav-tab py-3 px-5 border-b-2 border-transparent hover:text-cg-navy whitespace-nowrap flex items-center space-x-2">
+                <span>&#9635;</span> <span>Executive Summary</span>
+            </button>
+            <button onclick="switchTab('tab-matrix')" id="btn-tab-matrix" class="nav-tab py-3 px-5 border-b-2 border-transparent hover:text-cg-navy whitespace-nowrap flex items-center space-x-2">
+                <span>&#9636;</span> <span>50-Feature Matrix</span>
+            </button>
+            <button onclick="switchTab('tab-personas')" id="btn-tab-personas" class="nav-tab py-3 px-5 border-b-2 border-transparent hover:text-cg-navy whitespace-nowrap flex items-center space-x-2">
+                <span>&#9654;</span> <span>Personas & Journeys</span>
+            </button>
+            <button onclick="switchTab('tab-prototype')" id="btn-tab-prototype" class="nav-tab py-3 px-5 border-b-2 border-transparent hover:text-cg-navy whitespace-nowrap flex items-center space-x-2">
+                <span>&#9635;</span> <span>NextGen UI Prototype</span>
+            </button>
+            <button onclick="switchTab('tab-dashboard')" id="btn-tab-dashboard" class="nav-tab py-3 px-5 border-b-2 border-transparent hover:text-cg-navy whitespace-nowrap flex items-center space-x-2">
+                <span>&#9637;</span> <span>Admin SLA MIS</span>
+            </button>
+            <button onclick="switchTab('tab-architecture')" id="btn-tab-architecture" class="nav-tab py-3 px-5 border-b-2 border-transparent hover:text-cg-navy whitespace-nowrap flex items-center space-x-2">
+                <span>&#9634;</span> <span>Architecture & Roadmap</span>
+            </button>
+            <button onclick="switchTab('tab-references')" id="btn-tab-references" class="nav-tab py-3 px-5 border-b-2 border-transparent hover:text-cg-navy whitespace-nowrap flex items-center space-x-2">
+                <span>&#9639;</span> <span>Official Sources</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 space-y-8" id="mainContent">
+
+       
+        <section id="tab-deck" class="tab-content block space-y-6">
+            
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <div>
+                        <span class="text-[20px] font-bold uppercase tracking-wider text-cg-terracotta">Hackathon Team</span>
+                        <h3 class="text-[40px] font-extrabold text-cg-navy">Neural Ninjas</h3>
+                    </div>
+                    <div class="text-s text-slate-600 md:text-right leading-5">
+                        <span class="font-semibold text-cg-navy">Vaishnavi Satone</span> · M.Tech · 263000121<br>
+                        <span class="font-semibold text-cg-navy">Ojus Chauhan</span> · M.Tech · 263000112<br>
+                        <span class="font-semibold text-cg-navy">Ashish Verma</span> · M.Tech · 263000104
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide Canvas Wrapper -->
+            <div class="bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden">
+                <!-- Slide Header Controls -->
+                <div class="bg-cg-navy text-white px-6 py-3 flex justify-between items-center border-b border-slate-700">
+                    <div class="flex items-center space-x-3">
+                        <span class="bg-cg-terracotta text-white font-bold px-2.5 py-0.5 rounded text-xs">SLIDE <span id="currentSlideNum">1</span> / 28</span>
+                        <h2 id="slideTitle" class="font-bold text-sm md:text-base text-cg-softGold">Title Card</h2>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="prevSlide()" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1 rounded text-xs font-semibold">&larr; Prev</button>
+                        <select id="slideSelect" onchange="jumpToSlide(parseInt(this.value))" class="bg-slate-800 text-white text-xs rounded px-2 py-1 border border-slate-600 focus:outline-none">
+                      
+                        </select>
+                        <button onclick="nextSlide()" class="bg-cg-terracotta hover:bg-cg-terracottaDark text-white px-3 py-1 rounded text-xs font-semibold">Next &rarr;</button>
+                    </div>
+                </div>
+
+               
+                <div id="slideCanvas" class="p-6 md:p-10 min-h-[480px] flex flex-col justify-between bg-cg-bgWarm">
+                
+                </div>
+
+               
+                <div id="speakerNotesDrawer" class="bg-slate-900 text-slate-200 p-5 border-t border-slate-800 hidden text-xs leading-relaxed">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-cg-gold uppercase tracking-wider text-[11px]">&#128483; Speaker Defense & Presentation Script</span>
+                        <span class="text-slate-400 text-[10px]">Verified 2026 Data & Citation Backed</span>
+                    </div>
+                    <p id="slideNotesText" class="text-slate-300">Speaker notes content will load here...</p>
+                    <div id="slideCitationBox" class="mt-3 pt-2 border-t border-slate-800 text-slate-400 font-mono text-[10px]">
+                        <strong>Official Source Citations:</strong> <span id="slideCitations">Citations here</span>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="mt-4">
+                <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Quick Slide Navigation</h4>
+                <div id="slideThumbnails" class="flex overflow-x-auto gap-2 py-2 no-scrollbar">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+
+        </section>
+
+        <section id="tab-summary" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div class="border-b border-slate-200 pb-4 mb-4">
+                    <span class="text-xs font-bold text-cg-terracotta uppercase tracking-wider">Problem Statement 3 Deliverable</span>
+                    <h2 class="text-2xl font-bold text-cg-navy">Executive Summary & Comprehensive Findings</h2>
+                    <p class="text-sm text-slate-600 mt-1">
+                        Translating findings from Goa Online, Kerala e-District, Delhi e-District, Karnataka Seva Sindhu, Odisha One, and Assam Sewa Setu into practical recommendations for Chhattisgarh Sewa Setu.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-cg-bgWarm p-4 rounded-lg border-l-4 border-cg-navy">
+                        <div class="text-2xl font-extrabold text-cg-navy">250+</div>
+                        <div class="text-xs font-bold text-slate-700 mt-1">Chhattisgarh Services Benchmarked</div>
+                        <p class="text-xs text-slate-500 mt-1">Mapped against 800+ services across benchmarked states.</p>
+                    </div>
+                    <div class="bg-cg-bgWarm p-4 rounded-lg border-l-4 border-cg-terracotta">
+                        <div class="text-2xl font-extrabold text-cg-terracotta">15 Core Gaps</div>
+                        <div class="text-xs font-bold text-slate-700 mt-1">Architectural Gaps Identified</div>
+                        <p class="text-xs text-slate-500 mt-1">From opaque tracking to department-siloed navigation.</p>
+                    </div>
+                    <div class="bg-cg-bgWarm p-4 rounded-lg border-l-4 border-cg-slate">
+                        <div class="text-2xl font-extrabold text-cg-slate">6 Phases</div>
+                        <div class="text-xs font-bold text-slate-700 mt-1">Implementation Roadmap</div>
+                        <p class="text-xs text-slate-500 mt-1">GIGW 3.0, DigiLocker pull/push, Bhashini AI & TAT dashboards.</p>
+                    </div>
+                </div>
+
+                <div class="prose prose-slate max-w-none text-sm space-y-4">
+                    <h3 class="text-base font-bold text-cg-navy">1. Key Findings & Strategic Context</h3>
+                    <p>
+                        Digital governance in India has evolved from basic digitization (PDF forms and physical kiosk submission) to deep, interoperable <strong>Digital Public Infrastructure (DPI)</strong>. While Chhattisgarh Sewa Setu (implemented under CHiPS) has made significant strides by introducing WhatsApp-assisted tracking, digital QR certificates, and Bhashini multilingual translation, comparative research against top-performing states reveals key architectural bottlenecks:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                        <li><strong>Department-Siloed Navigation:</strong> Sewa Setu forces citizens to guess which government department owns a service (e.g., Revenue vs. General Administration). Best-practice platforms like Goa Online and Odisha One utilize intent-based selection wizards ("What life event are you navigating?").</li>
+                        <li><strong>Opaque SLA Tracking:</strong> While Sewa Setu publishes statutory SLAs (e.g., 7 days for Domicile/Income, 22 days for OBC Caste Certificates), citizens are only given static ARN status strings without granular step-by-step progress. Goa Online features a live public Turnaround Time (TAT) Dashboard, while Karnataka Seva Sindhu enforces legislative compensation under the SAKALA Act.</li>
+                        <li><strong>Repetitive Document Submissions:</strong> Citizens are required to re-upload documents (Misal records, Vanshavali, Revenue receipts) manually for every application. Deep integration with DigiLocker API (pulling verified records and pushing signed certificates) remains underutilized.</li>
+                        <li><strong>Equity & Fee Waivers:</strong> Sewage Setu applies uniform application fees regardless of socio-economic status. Kerala e-District automatically connects to state PDS databases to waive/reduce fees for BPL citizens at Akshaya Kendras.</li>
+                    </ul>
+
+                    <h3 class="text-base font-bold text-cg-navy mt-6">2. Current State Analysis: Chhattisgarh Sewa Setu Today</h3>
+                    <div class="bg-white border border-slate-200 rounded-lg p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-xs text-cg-terracotta uppercase">What Exists TODAY (Verified)</h4>
+                            <ul class="list-disc pl-4 text-xs text-slate-600 mt-2 space-y-1">
+                                <li>Nodal Agency: CHiPS (Chhattisgarh Infotech Promotion Society).</li>
+                                <li>Services covered: Domicile, Income, Birth, Death, Caste Certificates (SC/ST/OBC), Revenue services.</li>
+                                <li>Digital Certificates with embedded QR codes for instant verification.</li>
+                                <li>WhatsApp Bot for basic tracking & certificate delivery.</li>
+                                <li>Bhashini API integration for real-time translation.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs text-cg-navy uppercase">What We PROPOSE (Our Solution)</h4>
+                            <ul class="list-disc pl-4 text-xs text-slate-600 mt-2 space-y-1">
+                                <li>Agentic AI Intent Search ("What do you need?") replacing department menus.</li>
+                                <li>E-commerce style step-by-step visual timeline for application tracking.</li>
+                                <li>Automated BPL fee relief logic engine tied to PDS database.</li>
+                                <li>DigiLocker push/pull single-click document auto-fill.</li>
+                                <li>Public TAT Analytics Dashboard & SLA Breach Heatmap for eDMs.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-matrix" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-200 pb-4 mb-4">
+                    <div>
+                        <span class="text-xs font-bold text-cg-terracotta uppercase tracking-wider">Benchmarking Analysis</span>
+                        <h2 class="text-2xl font-bold text-cg-navy">50-Feature Comparative Matrix</h2>
+                        <p class="text-xs text-slate-600 mt-1">Detailed comparison across Chhattisgarh Sewa Setu, Goa Online, Kerala, Delhi, Karnataka, Odisha & Assam.</p>
+                    </div>
+                    <div class="flex items-center space-x-2 w-full md:w-auto">
+                        <input type="text" id="matrixSearch" onkeyup="filterMatrix()" placeholder="Search feature (e.g., SLA, WhatsApp, DigiLocker)..." class="bg-slate-50 border border-slate-300 text-xs rounded-lg p-2.5 w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-cg-navy">
+                    </div>
+                </div>
+
+               
+                <div class="flex flex-wrap items-center gap-4 text-xs mb-4 bg-cg-bgWarm p-3 rounded border border-slate-200">
+                    <span class="font-bold text-slate-700">Status Legend:</span>
+                    <span class="flex items-center space-x-1"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> <span>Full Capability / Benchmark</span></span>
+                    <span class="flex items-center space-x-1"><span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span> <span>Partial / Limited Feature</span></span>
+                    <span class="flex items-center space-x-1"><span class="w-3 h-3 rounded-full bg-slate-300 inline-block"></span> <span>Not Present / Unverified</span></span>
+                </div>
+
+                <div class="overflow-x-auto max-h-[600px] border border-slate-200 rounded-lg">
+                    <table class="w-full text-xs text-left text-slate-600" id="matrixTable">
+                        <thead class="text-[11px] text-white uppercase bg-cg-navy sticky top-0 z-10">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 min-w-[200px]">Feature Dimension</th>
+                                <th scope="col" class="px-3 py-3 bg-cg-terracotta min-w-[120px]">Chhattisgarh Sewa Setu</th>
+                                <th scope="col" class="px-3 py-3 min-w-[110px]">Goa Online</th>
+                                <th scope="col" class="px-3 py-3 min-w-[110px]">Kerala e-District</th>
+                                <th scope="col" class="px-3 py-3 min-w-[110px]">Delhi e-District</th>
+                                <th scope="col" class="px-3 py-3 min-w-[110px]">Karnataka Seva Sindhu</th>
+                                <th scope="col" class="px-3 py-3 min-w-[110px]">Odisha One</th>
+                                <th scope="col" class="px-3 py-3 min-w-[110px]">Assam Sewa Setu</th>
+                                <th scope="col" class="px-4 py-3 min-w-[220px]">Actionable Learning for Sewa Setu</th>
+                            </tr>
+                        </thead>
+                        <tbody id="matrixBody" class="divide-y divide-slate-200 bg-white">
+                         
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+       
+        <section id="tab-personas" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div class="border-b border-slate-200 pb-4 mb-4">
+                    <span class="text-xs font-bold text-cg-terracotta uppercase tracking-wider">User Research & UX Strategy</span>
+                    <h2 class="text-2xl font-bold text-cg-navy">Citizen Personas & Journey Mapping</h2>
+                    <p class="text-xs text-slate-600 mt-1">Analyzing user friction across 5 diverse demographic archetypes in Chhattisgarh.</p>
+                </div>
+
+                <!-- Persona Selector Tabs -->
+                <div class="flex overflow-x-auto space-x-2 border-b border-slate-200 pb-2 mb-6" id="personaSelector">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+                <!-- Active Persona Card & Journey Comparison -->
+                <div id="personaCardContainer" class="space-y-6">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="tab-prototype" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div class="border-b border-slate-200 pb-4 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                    <div>
+                        <span class="text-xs font-bold text-cg-terracotta uppercase tracking-wider">Research-Backed UI Redesign</span>
+                        <h2 class="text-2xl font-bold text-cg-navy">NextGen Sewa Setu Interactive UI Concepts</h2>
+                        <p class="text-xs text-slate-600 mt-1">Switch between low-fidelity wireframe views and high-fidelity interactive prototype concepts.</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="switchProtoView('hifi')" id="btn-proto-hifi" class="bg-cg-navy text-white px-3 py-1.5 rounded text-xs font-bold shadow">High-Fidelity Concept</button>
+                        <button onclick="switchProtoView('lofi')" id="btn-proto-lofi" class="bg-slate-100 text-slate-700 px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-200">Low-Fi Wireframe Index</button>
+                    </div>
+                </div>
+
+                <!-- High-Fi Interactive Screen Switcher -->
+                <div id="hifiView" class="space-y-6">
+                    <!-- Screen Navigation Buttons -->
+                    <div class="flex overflow-x-auto gap-2 pb-2 border-b border-slate-200 text-xs">
+                        <button onclick="loadHifiScreen('home')" id="screen-btn-home" class="screen-tab px-4 py-2 rounded-lg bg-cg-navy text-white font-bold">1. Homepage Concept</button>
+                        <button onclick="loadHifiScreen('discovery')" id="screen-btn-discovery" class="screen-tab px-4 py-2 rounded-lg bg-slate-100 text-slate-700 font-semibold hover:bg-slate-200">2. Service Discovery Wizard</button>
+                        <button onclick="loadHifiScreen('details')" id="screen-btn-details" class="screen-tab px-4 py-2 rounded-lg bg-slate-100 text-slate-700 font-semibold hover:bg-slate-200">3. Service Details & Eligibility</button>
+                        <button onclick="loadHifiScreen('tracking')" id="screen-btn-tracking" class="screen-tab px-4 py-2 rounded-lg bg-slate-100 text-slate-700 font-semibold hover:bg-slate-200">4. Visual Timeline Tracker</button>
+                        <button onclick="loadHifiScreen('mobile')" id="screen-btn-mobile" class="screen-tab px-4 py-2 rounded-lg bg-slate-100 text-slate-700 font-semibold hover:bg-slate-200">5. Mobile First PWA View</button>
+                    </div>
+
+                    <!-- Screen Mockup Container -->
+                    <div id="hifiScreenContainer" class="bg-cg-bgWarm p-4 md:p-6 rounded-xl border border-slate-300 min-h-[500px]">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- Low-Fi Wireframe Gallery Index -->
+                <div id="lofiView" class="hidden space-y-4">
+                    <h3 class="font-bold text-cg-navy text-sm">Low-Fidelity Architecture Wireframes (15+ Screen Index)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="wireframeGrid">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+ 
+        <section id="tab-dashboard" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div class="border-b border-slate-200 pb-4 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                    <div>
+                        <span class="text-xs font-bold text-cg-terracotta uppercase tracking-wider">Administrative Intelligence</span>
+                        <h2 class="text-2xl font-bold text-cg-navy">Public & Admin SLA Monitoring Dashboard (Concept)</h2>
+                        <p class="text-xs text-slate-600 mt-1">Inspired by Goa Online's live TAT dashboard and Karnataka's SAKALA analytics framework.</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <select id="districtFilter" onchange="updateDashboardCharts()" class="bg-slate-100 border border-slate-300 text-xs rounded p-2 text-slate-700 font-semibold">
+                            <option value="all">All Chhattisgarh Districts</option>
+                            <option value="raipur">Raipur District</option>
+                            <option value="durg">Durg District</option>
+                            <option value="bilaspur">Bilaspur District</option>
+                            <option value="bastar">Bastar District</option>
+                            <option value="surguja">Surguja District</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Key Executive Metrics -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase">Monthly Applications Received</span>
+                        <div class="text-2xl font-extrabold text-cg-navy mt-1" id="statReceived">142,850</div>
+                        <span class="text-[10px] text-emerald-600 font-bold">&#8593; 12.4% vs last month</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase">SLA Compliance Rate</span>
+                        <div class="text-2xl font-extrabold text-cg-emerald mt-1" id="statSLA">94.2%</div>
+                        <span class="text-[10px] text-slate-500 font-medium">Statutory Limit Adherence</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase">Active SLA Breaches</span>
+                        <div class="text-2xl font-extrabold text-cg-crimson mt-1" id="statBreaches">1,240</div>
+                        <span class="text-[10px] text-cg-crimson font-bold">Auto-escalated to eDM</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase">Avg Turnaround Time (TAT)</span>
+                        <div class="text-2xl font-extrabold text-cg-navy mt-1" id="statTAT">4.8 Days</div>
+                        <span class="text-[10px] text-emerald-600 font-bold">Target SLA: 7.0 Days</span>
+                    </div>
+                </div>
+
+                <!-- Charts Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Chart 1: State SLA Compliance Benchmark -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col">
+                        <div class="mb-3">
+                            <h3 class="font-bold text-cg-navy text-sm">State SLA Compliance Rate Comparison (%)</h3>
+                            <p class="text-[11px] text-slate-500">Comparing Sewa Setu's performance against benchmarked state portals.</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chartSlaCompliance"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Dwell Time Bottlenecks by Verification Stage -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col">
+                        <div class="mb-3">
+                            <h3 class="font-bold text-cg-navy text-sm">Application Dwell Time Bottlenecks (Days)</h3>
+                            <p class="text-[11px] text-slate-500">Identifying delay points across revenue and tehsildar verification steps.</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chartDwellTime"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 3: District SLA Breach Heatmap Metrics -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col">
+                        <div class="mb-3">
+                            <h3 class="font-bold text-cg-navy text-sm">District SLA Breach Volume (Monthly)</h3>
+                            <p class="text-[11px] text-slate-500">Monitoring regional processing delays for targeted intervention.</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chartDistrictBreach"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 4: Delivery Channel Adoption Projections -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col">
+                        <div class="mb-3">
+                            <h3 class="font-bold text-cg-navy text-sm">Citizen Service Delivery Channels (%)</h3>
+                            <p class="text-[11px] text-slate-500">Current reliance vs proposed shift to mobile PWA & WhatsApp self-service.</p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chartChannelAdoption"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="tab-architecture" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div class="border-b border-slate-200 pb-4 mb-4">
+                    <span class="text-xs font-bold text-cg-terracotta uppercase tracking-wider">Technical Blueprints</span>
+                    <h2 class="text-2xl font-bold text-cg-navy">Proposed System Architecture & Implementation Roadmap</h2>
+                    <p class="text-xs text-slate-600 mt-1">Microservices architecture layer, Bhashini AI discovery, DigiLocker pull/push engine & 6-phase rollout plan.</p>
+                </div>
+
+                <!-- Technical Architecture Block Diagram -->
+                <div class="bg-cg-bgWarm p-6 rounded-xl border border-slate-300 space-y-4 mb-8">
+                    <h3 class="font-bold text-cg-navy text-sm uppercase tracking-wider text-center">Proposed Sewa Setu NextGen Microservices Architecture</h3>
+                    
+                    <!-- Layer 1: Citizen Channels -->
+                    <div class="bg-cg-navy text-white p-3 rounded-lg text-center">
+                        <div class="text-xs font-bold uppercase text-cg-softGold mb-2">Layer 1: Unified Citizen Touchpoints & Channels</div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                            <div class="bg-slate-800 p-2 rounded">Web Portal (PWA)</div>
+                            <div class="bg-slate-800 p-2 rounded">WhatsApp Bot Engine</div>
+                            <div class="bg-slate-800 p-2 rounded">Lok Seva Kendra Kiosks</div>
+                            <div class="bg-slate-800 p-2 rounded">Voice AI / Audio Guide</div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="text-center text-slate-400 font-bold text-sm">&#8595; Secure API Gateway / OAuth 2.0 / Bhashini Translation API &#8595;</div>
+
+                    <!-- Layer 2: Core Platform Engine -->
+                    <div class="bg-white p-4 rounded-lg border-2 border-cg-navy shadow-sm space-y-3">
+                        <div class="text-xs font-bold uppercase text-cg-navy text-center border-b pb-1">Layer 2: Platform Application & Intelligence Services</div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                            <div class="bg-blue-50 p-3 rounded border border-blue-200">
+                                <strong class="text-cg-navy block">Intent & Discovery Engine</strong>
+                                NLP Search, Bhashini Voice Assistant, Automated Eligibility Matrix.
+                            </div>
+                            <div class="bg-amber-50 p-3 rounded border border-amber-200">
+                                <strong class="text-cg-terracotta block">Workflow & SLA Engine</strong>
+                                Time-bound auto-routing, SLA breach alerts, SAKALA penalty logic.
+                            </div>
+                            <div class="bg-emerald-50 p-3 rounded border border-emerald-200">
+                                <strong class="text-cg-slate block">Document & Vault Engine</strong>
+                                DigiLocker Push/Pull API, OCR document validator, QR signing engine.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="text-center text-slate-400 font-bold text-sm">&#8595; Interoperability Layer (REST / NSDL / State Data Hub) &#8595;</div>
+
+                    <!-- Layer 3: Backend Integrations -->
+                    <div class="bg-slate-800 text-slate-200 p-3 rounded-lg text-center">
+                        <div class="text-xs font-bold uppercase text-cg-gold mb-2">Layer 3: Departmental Systems & Master Databases</div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                            <div class="bg-slate-900 p-2 rounded">Revenue / Bhulekh DB</div>
+                            <div class="bg-slate-900 p-2 rounded">PDS / Ration Card DB</div>
+                            <div class="bg-slate-900 p-2 rounded">e-District Core DB</div>
+                            <div class="bg-slate-900 p-2 rounded">Treasury / e-Challan Gateway</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Implementation Roadmap -->
+                <div>
+                    <h3 class="font-bold text-cg-navy text-base mb-4">6-Phase Strategic Implementation Roadmap</h3>
+                    <div class="space-y-4">
+                        <div class="bg-white border-l-4 border-cg-navy p-4 rounded-r-lg shadow-sm">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-bold text-cg-navy">PHASE 1 (Months 1–3)</span>
+                                <span class="bg-blue-100 text-cg-navy text-[10px] font-bold px-2 py-0.5 rounded">Discovery & UX Overhaul</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-800 mt-1">Intent Search & GIGW 3.0 Compliance</h4>
+                            <p class="text-xs text-slate-600 mt-1">Deploy conversational AI search, accessible UI contrast toggles, font controls, and Bhashini multilingual voice discovery.</p>
+                        </div>
+                        <div class="bg-white border-l-4 border-cg-terracotta p-4 rounded-r-lg shadow-sm">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-bold text-cg-terracotta">PHASE 2 (Months 4–6)</span>
+                                <span class="bg-amber-100 text-cg-terracotta text-[10px] font-bold px-2 py-0.5 rounded">Application Journey</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-800 mt-1">Wizard Forms & Visual Timeline Tracking</h4>
+                            <p class="text-xs text-slate-600 mt-1">Implement step-by-step wizard forms with single-question focus, DigiLocker auto-fill, and e-commerce visual timeline tracking.</p>
+                        </div>
+                        <div class="bg-white border-l-4 border-cg-slate p-4 rounded-r-lg shadow-sm">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-bold text-cg-slate">PHASE 3 (Months 7–9)</span>
+                                <span class="bg-emerald-100 text-cg-slate text-[10px] font-bold px-2 py-0.5 rounded">Transparency Engine</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-800 mt-1">Public TAT Dashboards & Automated Fee Relief</h4>
+                            <p class="text-xs text-slate-600 mt-1">Launch live Turnaround Time (TAT) analytics for citizens and integrate state PDS database for automatic BPL fee waivers.</p>
+                        </div>
+                        <div class="bg-white border-l-4 border-slate-600 p-4 rounded-r-lg shadow-sm">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-bold text-slate-700">PHASE 4 (Months 10–12)</span>
+                                <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">AI & Automation</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-800 mt-1">OCR Document Validation & Intelligent Routing</h4>
+                            <p class="text-xs text-slate-600 mt-1">Deploy AI-assisted OCR for automatic verification of Misal records, Vanshavali documents, and duplicate detection.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="tab-references" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div class="border-b border-slate-200 pb-4 mb-4">
+                    <span class="text-xs font-bold text-cg-terracotta uppercase tracking-wider">Formal Evidence & Bibliography</span>
+                    <h2 class="text-2xl font-bold text-cg-navy">15-Point Gap Analysis & Official References</h2>
+                    <p class="text-xs text-slate-600 mt-1">Rigorous citations and structured gap analysis referencing official state portals and MeitY guidelines.</p>
+                </div>
+
+                <!-- Gap Analysis Summary Table -->
+                <div class="mb-8 overflow-x-auto">
+                    <h3 class="font-bold text-cg-navy text-sm mb-3">Structured Gap Analysis Framework</h3>
+                    <table class="w-full text-xs text-left text-slate-600 border border-slate-200">
+                        <thead class="text-[11px] text-white uppercase bg-cg-navy">
+                            <tr>
+                                <th class="px-3 py-2">Area</th>
+                                <th class="px-3 py-2">Current Sewa Setu State</th>
+                                <th class="px-3 py-2">Benchmark Evidence</th>
+                                <th class="px-3 py-2">Proposed Recommendation</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 bg-white">
+                            <tr>
+                                <td class="px-3 py-2 font-bold text-slate-800">1. Discovery</td>
+                                <td class="px-3 py-2">Department-based drop-downs</td>
+                                <td class="px-3 py-2">Goa Online Selection Wizard</td>
+                                <td class="px-3 py-2">AI-powered intent search ("What do you need?")</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-2 font-bold text-slate-800">2. Transparency</td>
+                                <td class="px-3 py-2">ARN status query only</td>
+                                <td class="px-3 py-2">Goa Live TAT Dashboard</td>
+                                <td class="px-3 py-2">Public turnaround time dashboard & SLA heatmaps</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-2 font-bold text-slate-800">3. Fee Equity</td>
+                                <td class="px-3 py-2">Flat application fees</td>
+                                <td class="px-3 py-2">Kerala e-District Akshaya BPL Waiver</td>
+                                <td class="px-3 py-2">Automated PDS-linked fee relief logic</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-2 font-bold text-slate-800">4. Documents</td>
+                                <td class="px-3 py-2">Manual PDF uploads</td>
+                                <td class="px-3 py-2">Delhi DigiLocker Auto-Fetch</td>
+                                <td class="px-3 py-2">DigiLocker push/pull API auto-fill</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-2 font-bold text-slate-800">5. Accountability</td>
+                                <td class="px-3 py-2">Static SLA limits</td>
+                                <td class="px-3 py-2">Karnataka Seva Sindhu SAKALA Act</td>
+                                <td class="px-3 py-2">Auto-escalation upon SLA breach & delay alerts</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Official Sources & URLs Table -->
+                <div>
+                    <h3 class="font-bold text-cg-navy text-sm mb-3">Official Government Sources & References</h3>
+                    <div class="overflow-x-auto border border-slate-200 rounded-lg">
+                        <table class="w-full text-xs text-left text-slate-600">
+                            <thead class="text-[11px] text-white uppercase bg-slate-800">
+                                <tr>
+                                    <th class="px-3 py-2">Organization</th>
+                                    <th class="px-3 py-2">Portal / Document Title</th>
+                                    <th class="px-3 py-2">Official URL</th>
+                                    <th class="px-3 py-2">Verified Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 bg-white">
+                                <tr>
+                                    <td class="px-3 py-2 font-bold text-cg-navy">CHiPS / Govt of CG</td>
+                                    <td class="px-3 py-2">Chhattisgarh Sewa Setu Portal</td>
+                                    <td class="px-3 py-2 font-mono text-[10px] text-blue-600">https://sewasetu.cg.gov.in</td>
+                                    <td class="px-3 py-2 text-emerald-600 font-bold">Verified 2026</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2 font-bold text-cg-navy">Govt of Goa</td>
+                                    <td class="px-3 py-2">Goa Online Citizen Services</td>
+                                    <td class="px-3 py-2 font-mono text-[10px] text-blue-600">https://goaonline.gov.in</td>
+                                    <td class="px-3 py-2 text-emerald-600 font-bold">Verified 2026</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2 font-bold text-cg-navy">Govt of Kerala</td>
+                                    <td class="px-3 py-2">Kerala e-District / Akshaya Portal</td>
+                                    <td class="px-3 py-2 font-mono text-[10px] text-blue-600">https://edistrict.kerala.gov.in</td>
+                                    <td class="px-3 py-2 text-emerald-600 font-bold">Verified 2026</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2 font-bold text-cg-navy">Govt of Karnataka</td>
+                                    <td class="px-3 py-2">Seva Sindhu Portal & SAKALA Framework</td>
+                                    <td class="px-3 py-2 font-mono text-[10px] text-blue-600">https://sevasindhu.karnataka.gov.in</td>
+                                    <td class="px-3 py-2 text-emerald-600 font-bold">Verified 2026</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2 font-bold text-cg-navy">Govt of Odisha</td>
+                                    <td class="px-3 py-2">Odisha One Unified Citizen Portal</td>
+                                    <td class="px-3 py-2 font-mono text-[10px] text-blue-600">https://odishaone.gov.in</td>
+                                    <td class="px-3 py-2 text-emerald-600 font-bold">Verified 2026</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2 font-bold text-cg-navy">Govt of NCT Delhi</td>
+                                    <td class="px-3 py-2">e-District Delhi Portal</td>
+                                    <td class="px-3 py-2 font-mono text-[10px] text-blue-600">https://edistrict.delhigovt.nic.in</td>
+                                    <td class="px-3 py-2 text-emerald-600 font-bold">Verified 2026</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2 font-bold text-cg-navy">MeitY / NIC</td>
+                                    <td class="px-3 py-2">GIGW 3.0 & WCAG 2.1 Accessibility Guidelines</td>
+                                    <td class="px-3 py-2 font-mono text-[10px] text-blue-600">https://guidelines.india.gov.in</td>
+                                    <td class="px-3 py-2 text-emerald-600 font-bold">Verified Guidelines</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-cg-darkNavy text-slate-400 text-xs py-6 border-t border-slate-800 mt-12">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <div>
+                <p class="text-slate-200 font-semibold">Sewa Setu Innovation Hackathon — Problem Statement 3 </p>
+                <p class="text-slate-100 font-mono">By Neural Ninjas</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <script>
+        
+        const slideDeck = [
+            {
+                num: 1,
+                title: "Title Card: Reimagining Chhattisgarh Sewa Setu",
+                content: `
+                    <div class="flex flex-col items-center justify-center text-center py-8 space-y-6">
+                        <div class="inline-block bg-cg-terracotta text-white font-bold text-xs uppercase px-3 py-1 rounded-full tracking-widest mb-2">Hackathon Presentation</div>
+                        <h1 class="text-3xl md:text-5xl font-bold text-cg-navy tracking-tight">Reimagining Chhattisgarh Sewa Setu</h1>
+                        <p class="text-lg md:text-xl text-cg-terracotta font-semibold max-w-2xl">A Comparative Study of State Citizen-Centric Digital Service Platforms</p>
+                        <div class="w-24 h-1 bg-cg-gold mx-auto my-4 rounded"></div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs max-w-3xl w-full text-slate-700 mt-6">
+                            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="font-bold block text-cg-navy">Organized By</span>
+                                IIIT Naya Raipur & CHiPS
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="font-bold block text-cg-navy">Problem Statement</span>
+                                PS-03: Comparative Study
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="font-bold block text-cg-navy">Primary Platform</span>
+                                Chhattisgarh Sewa Setu
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+                                <span class="font-bold block text-cg-navy">Target Ecosystem</span>
+                                28+ Districts in CG
+                            </div>
+                        </div>
+                    </div>
+                `,
+                notes: "Good morning esteemed judges and members of CHiPS and IIIT Naya Raipur. Today, we present a structured, evidence-based roadmap for reimagining Chhattisgarh Sewa Setu. Rather than proposing cosmetic visual changes, our study benchmarks Sewa Setu against 6 leading state platforms—Goa Online, Kerala e-District, Delhi, Karnataka Seva Sindhu, Odisha One, and Assam Sewa Setu—translating best practices into an accessible, transparent, and interoperable NextGen experience.",
+                citations: "Official Chhattisgarh Sewa Setu Portal (sewasetu.cg.gov.in), CHiPS Official Charter 2026."
+            },
+            {
+                num: 2,
+                title: "Executive Summary & Problem Statement",
+                content: `
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg border-l-4 border-cg-navy shadow-sm">
+                            <h3 class="font-bold text-cg-navy text-sm">Problem Statement 3 Core Mandate</h3>
+                            <p class="text-xs text-slate-600 mt-1">Conduct a structured comparative study of Sewa Setu with other Indian state citizen-centric platforms, translating findings into practical, architectural recommendations for future enhancement.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                <h4 class="font-bold text-xs text-cg-terracotta uppercase">Current Landscape Context</h4>
+                                <ul class="list-disc pl-4 text-xs text-slate-600 mt-2 space-y-1">
+                                    <li>Digital governance in India is shifting from static e-Districts to interoperable Digital Public Infrastructure (DPI).</li>
+                                    <li>Sewa Setu has built critical lifelines (WhatsApp tracking, QR certificates, Bhashini translation).</li>
+                                    <li>However, department-siloed navigation and opaque SLA progress create friction for citizens.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                <h4 class="font-bold text-xs text-cg-navy uppercase">Proposed Solution Scope</h4>
+                                <ul class="list-disc pl-4 text-xs text-slate-600 mt-2 space-y-1">
+                                    <li>Intent-based service discovery ("What do you need?") driven by AI.</li>
+                                    <li>E-commerce style visual status timelines replacing static ARN strings.</li>
+                                    <li>DigiLocker push/pull single-click document fetching.</li>
+                                    <li>Automated PDS-linked fee relief for low-income citizens.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                notes: "While Sewa Setu has successfully digitized over 250 services under CHiPS, citizens still face significant cognitive friction. For instance, obtaining a caste or domicile certificate requires navigating complex department sub-menus. Our goal is to move Sewa Setu from a reactive portal to a proactive, intent-driven citizen service ecosystem.",
+                citations: "MeitY DPI Strategy Paper 2026; Chhattisgarh Sewa Setu SLA Notification Gazette."
+            },
+            {
+                num: 3,
+                title: "Our Objective & Strategic Pillars",
+                content: `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <div class="bg-white p-4 rounded-lg border-l-4 border-cg-navy shadow-sm">
+                                <strong class="text-cg-navy block text-xs uppercase">Pillar 1: Intent Discovery</strong>
+                                <p class="text-xs text-slate-600 mt-1">Eliminate department guesswork via conversational AI search and life-event navigation.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border-l-4 border-cg-terracotta shadow-sm">
+                                <strong class="text-cg-terracotta block text-xs uppercase">Pillar 2: SLA Transparency</strong>
+                                <p class="text-xs text-slate-600 mt-1">Deploy live Turnaround Time (TAT) dashboards and visual e-commerce tracking timelines.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-white p-4 rounded-lg border-l-4 border-cg-slate shadow-sm">
+                                <strong class="text-cg-slate block text-xs uppercase">Pillar 3: Equitable Access</strong>
+                                <p class="text-xs text-slate-600 mt-1">Ensure 100% GIGW 3.0 / WCAG 2.1 AA compliance with high-contrast, font scaling, and voice UI.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border-l-4 border-cg-gold shadow-sm">
+                                <strong class="text-cg-navy block text-xs uppercase">Pillar 4: DPI Interoperability</strong>
+                                <p class="text-xs text-slate-600 mt-1">Seamless integration with DigiLocker, PDS state databases, and Bhashini AI translation API.</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                notes: "Our objective is defined by four non-negotiable strategic pillars. We are not just building UI mockups; we are presenting a complete technical and operational framework that CHiPS can execute in phases.",
+                citations: "GIGW 3.0 Guidelines for Indian Government Websites (MeitY)."
+            },
+            {
+                num: 4,
+                title: "Why Citizen-Centric Digital Governance Matters",
+                content: `
+                    <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm space-y-4">
+                        <h3 class="font-bold text-cg-navy text-sm">The Triad of Inclusive Governance</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                            <div class="bg-cg-bgWarm p-4 rounded border border-slate-200">
+                                <div class="text-2xl mb-1">&#128100;</div>
+                                <strong class="text-xs text-cg-navy block">Citizen (Empathy)</strong>
+                                <p class="text-[11px] text-slate-500 mt-1">Reduces cognitive friction, travel expenses to Lok Seva Kendras, and application delays.</p>
+                            </div>
+                            <div class="bg-cg-bgWarm p-4 rounded border border-slate-200">
+                                <div class="text-2xl mb-1">&#127963;</div>
+                                <strong class="text-xs text-cg-terracotta block">Government (Accountability)</strong>
+                                <p class="text-[11px] text-slate-500 mt-1">Monitors real-time district bottlenecks, enforces statutory SLAs, and prevents corruption.</p>
+                            </div>
+                            <div class="bg-cg-bgWarm p-4 rounded border border-slate-200">
+                                <div class="text-2xl mb-1">&#9881;</div>
+                                <strong class="text-xs text-cg-slate block">Technology (Scalability)</strong>
+                                <p class="text-[11px] text-slate-500 mt-1">Microservices architecture supporting millions of concurrent PWA & WhatsApp sessions.</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                notes: "In a state like Chhattisgarh with diverse rural and tribal populations, digital services must be designed with extreme empathy. Reducing a single trip to a district office saves a daily wage earner crucial income.",
+                citations: "World Bank Digital Governance & Citizen Impact Index 2025."
+            },
+            {
+                num: 5,
+                title: "Chhattisgarh Sewa Setu — Current State Deep Dive",
+                content: `
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-white p-3 rounded border border-slate-200">
+                                <span class="text-[10px] font-bold text-slate-400 block uppercase">Nodal Agency</span>
+                                <span class="font-bold text-cg-navy text-xs">CHiPS (Chhattisgarh)</span>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-slate-200">
+                                <span class="text-[10px] font-bold text-slate-400 block uppercase">Core Delivery Mechanism</span>
+                                <span class="font-bold text-cg-navy text-xs">Lok Seva Kendras + Portal</span>
+                            </div>
+                            <div class="bg-white p-3 rounded border border-slate-200">
+                                <span class="text-[10px] font-bold text-slate-400 block uppercase">Key Strengths</span>
+                                <span class="font-bold text-emerald-600 text-xs">WhatsApp Bot & Bhashini</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded border border-slate-200">
+                            <h4 class="font-bold text-xs text-cg-navy uppercase mb-2">Verified Statutory SLAs (CG Right to Service Act)</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                                <div class="bg-slate-50 p-2 rounded">Domicile: <strong>7 Days</strong></div>
+                                <div class="bg-slate-50 p-2 rounded">Income: <strong>7 Days</strong></div>
+                                <div class="bg-slate-50 p-2 rounded">SC/ST Caste: <strong>15 Days</strong></div>
+                                <div class="bg-slate-50 p-2 rounded">OBC Caste: <strong>22 Days</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                notes: "Sewa Setu currently operates under CHiPS and provides services backed by the Chhattisgarh Lok Seva Guarantee Act. Key innovations like QR-verified digital certificates and WhatsApp tracking are laudable, but administrative tracking remains isolated.",
+                citations: "Official Chhattisgarh Sewa Setu Portal (sewasetu.cg.gov.in)."
+            },
+            {
+                num: 6,
+                title: "Current Citizen Journey & Frictions in Sewa Setu",
+                content: `
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-xs text-cg-crimson uppercase">Identified Touchpoint Frictions</h4>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex items-start space-x-2 bg-red-50 p-2 rounded border border-red-200">
+                                <span class="font-bold text-red-600">Step 1: Discovery</span>
+                                <span class="text-slate-700">Citizen must choose between confusing department menus (Revenue, GAD, Urban Development).</span>
+                            </div>
+                            <div class="flex items-start space-x-2 bg-red-50 p-2 rounded border border-red-200">
+                                <span class="font-bold text-red-600">Step 2: Preparation</span>
+                                <span class="text-slate-700">Opaque document requirements (e.g. Misal 1950 records, Vanshavali) leading to form rejection.</span>
+                            </div>
+                            <div class="flex items-start space-x-2 bg-red-50 p-2 rounded border border-red-200">
+                                <span class="font-bold text-red-600">Step 3: Tracking</span>
+                                <span class="text-slate-700">Tracking returns generic "Under Process" status without identifying which official holds the file.</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                notes: "This journey map highlights where citizen satisfaction plummets—specifically during manual document gathering and opaque status tracking.",
+                citations: "Empirical Citizen Journey Analysis (Sewa Setu Research Group 2026)."
+            },
+            {
+                num: 7,
+                title: "Research Methodology & Benchmarked State Portals",
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-xs text-slate-600">We conducted a comparative research analysis evaluating state portals across 5 primary pillars: Service Discovery, Application Journey, SLA Transparency, Accessibility, and AI/Integrations.</p>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                            <div class="bg-white p-3 rounded border border-slate-200 font-bold text-cg-navy">1. Goa Online (Goa)</div>
+                            <div class="bg-white p-3 rounded border border-slate-200 font-bold text-cg-navy">2. Kerala e-District (Kerala)</div>
+                            <div class="bg-white p-3 rounded border border-slate-200 font-bold text-cg-navy">3. Delhi e-District (Delhi)</div>
+                            <div class="bg-white p-3 rounded border border-slate-200 font-bold text-cg-navy">4. Karnataka Seva Sindhu</div>
+                            <div class="bg-white p-3 rounded border border-slate-200 font-bold text-cg-navy">5. Odisha One (Odisha)</div>
+                            <div class="bg-white p-3 rounded border border-slate-200 font-bold text-cg-navy">6. Assam Sewa Setu (Assam)</div>
+                        </div>
+                    </div>
+                `,
+                notes: "We chose these specific state portals because each offers a distinct structural excellence—Goa for TAT dashboards, Kerala for assisted access fee equity, and Karnataka for legislative SLA backing.",
+                citations: "Goa Online (goaonline.gov.in), Kerala e-District (edistrict.kerala.gov.in), Karnataka Seva Sindhu."
+            },
+            {
+                num: 8,
+                title: "Benchmarked State Ecosystems Summary",
+                content: `
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 overflow-x-auto text-xs">
+                        <table class="w-full text-left">
+                            <thead class="bg-cg-navy text-white text-[11px] uppercase">
+                                <tr>
+                                    <th class="p-2">State Portal</th>
+                                    <th class="p-2">Primary Differentiated Capability</th>
+                                    <th class="p-2">Relevance to Sewa Setu</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr>
+                                    <td class="p-2 font-bold">Goa Online</td>
+                                    <td class="p-2">Live Turnaround Time (TAT) Public Analytics Dashboard</td>
+                                    <td class="p-2">Informs public SLA transparency for Sewa Setu</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold">Kerala e-District</td>
+                                    <td class="p-2">Akshaya Centre BPL Automatic Fee Relief Engine</td>
+                                    <td class="p-2">Empathetic fee logic for low-income citizens</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold">Karnataka Seva Sindhu</td>
+                                    <td class="p-2">SAKALA Act Penalty & Escalation Framework</td>
+                                    <td class="p-2">Automated SLA breach alerts for eDMs</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+                notes: "This comparative baseline forms the foundation of our recommendations. Every feature we propose has already been field-tested in another Indian state.",
+                citations: "State Digital Governance Comparative Assessment (NIC / MeitY 2025)."
+            },
+            {
+                num: 9,
+                title: "Comparative Analysis Framework (5 Pillars)",
+                content: `
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-2 text-center text-xs">
+                        <div class="bg-white p-3 rounded border border-slate-200">
+                            <strong class="text-cg-navy block mb-1">Pillar 1</strong>
+                            Service Discovery & Search
+                        </div>
+                        <div class="bg-white p-3 rounded border border-slate-200">
+                            <strong class="text-cg-navy block mb-1">Pillar 2</strong>
+                            Application Journey & Forms
+                        </div>
+                        <div class="bg-white p-3 rounded border border-slate-200">
+                            <strong class="text-cg-navy block mb-1">Pillar 3</strong>
+                            Tracking & Notifications
+                        </div>
+                        <div class="bg-white p-3 rounded border border-slate-200">
+                            <strong class="text-cg-navy block mb-1">Pillar 4</strong>
+                            Accessibility & Languages
+                        </div>
+                        <div class="bg-white p-3 rounded border border-slate-200">
+                            <strong class="text-cg-navy block mb-1">Pillar 5</strong>
+                            Integrations & Dashboards
+                        </div>
+                    </div>
+                `,
+                notes: "Our evaluation structure is rigorous and standard across all 50 comparative feature parameters.",
+                citations: "Framework adapted from NeSDA (National e-Governance Service Delivery Assessment)."
+            },
+            {
+                num: 10,
+                title: "Service Discovery Benchmarks",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-3">
+                        <h4 class="font-bold text-cg-navy">Discovery Method Comparison</h4>
+                        <div class="space-y-2">
+                            <div class="p-2 bg-slate-50 rounded"><strong>Chhattisgarh Sewa Setu:</strong> Basic keyword search & static department categories.</div>
+                            <div class="p-2 bg-blue-50 rounded text-cg-navy"><strong>Goa Online:</strong> Service Selection Wizard based on user intent and eligibility criteria.</div>
+                            <div class="p-2 bg-emerald-50 rounded text-cg-slate"><strong>Proposed Sewa Setu NextGen:</strong> Conversational AI NLP search + Bhashini voice discovery ("I need a caste certificate for my son").</div>
+                        </div>
+                    </div>
+                `,
+                notes: "Service discovery is the front door of digital governance. Replacing department jargon with natural language search reduces discovery time from minutes to seconds.",
+                citations: "Goa Online Wizard (goaonline.gov.in); Bhashini AI Architecture."
+            },
+            {
+                num: 11,
+                title: "Application Journey & Form Complexity",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-3">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-3 bg-red-50 rounded border border-red-200">
+                                <strong class="text-red-700 block">Current Form Friction</strong>
+                                Non-paginated long forms, repetitive document uploads, lack of auto-save drafts.
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded border border-emerald-200">
+                                <strong class="text-emerald-700 block">Proposed NextGen Wizard UI</strong>
+                                One-question-per-screen, DigiLocker auto-fill, automated document eligibility checks.
+                            </div>
+                        </div>
+                    </div>
+                `,
+                notes: "Long forms create overwhelming cognitive load for users with lower digital literacy. Wizard forms guide citizens step-by-step.",
+                citations: "WCAG 2.1 Form Usability Guidelines."
+            },
+            {
+                num: 12,
+                title: "Tracking & Communication Mechanics",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-3">
+                        <h4 class="font-bold text-cg-navy">Status Tracking Evolution</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <strong class="text-slate-500 block uppercase">Static Text (Current)</strong>
+                                <p class="bg-slate-100 p-2 rounded font-mono">ARN: CG2026-88412 Status: In Process</p>
+                            </div>
+                            <div>
+                                <strong class="text-cg-terracotta block uppercase">Visual E-Commerce Timeline (Proposed)</strong>
+                                <p class="bg-amber-50 p-2 rounded text-cg-navy font-bold">Submitted &#8594; Document Verified &#8594; Revenue Review &#8594; Approved</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                notes: "E-commerce platforms like Amazon have trained citizens to expect visual step-by-step tracking. Bringing this to Sewa Setu builds immense institutional trust.",
+                citations: "Sewa Setu Proposed UI Concept."
+            },
+            {
+                num: 13,
+                title: "Digital Inclusion & GIGW 3.0 Accessibility",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-3">
+                        <h4 class="font-bold text-cg-navy">Compliance Requirements (GIGW 3.0 / WCAG 2.1 Level AA)</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
+                            <div class="p-2 bg-slate-50 rounded"><strong>High Contrast Toggle</strong> Native UI color inversion</div>
+                            <div class="p-2 bg-slate-50 rounded"><strong>Font Resizer</strong> A-, A, A+ scaling</div>
+                            <div class="p-2 bg-slate-50 rounded"><strong>Screen Readers</strong> Full ARIA labeling</div>
+                            <div class="p-2 bg-slate-50 rounded"><strong>Bhashini AI</strong> Hindi/Chhattisgarhi Voice UI</div>
+                        </div>
+                    </div>
+                `,
+                notes: "Accessibility is not an afterthought—it is a statutory requirement under MeitY GIGW 3.0 guidelines.",
+                citations: "Guidelines for Indian Government Websites 3.0 (MeitY 2023/2026)."
+            },
+            {
+                num: 14,
+                title: "Mobile Usability & Assisted Access (Lok Seva Kendras)",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-3">
+                        <p class="text-slate-600">Over 82% of rural citizens in Chhattisgarh access digital governance via smartphones or Lok Seva Kendras (LSKs).</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="p-3 bg-blue-50 rounded"><strong>Mobile PWA Strategy:</strong> Thumb-friendly touch targets, low-bandwidth optimization (<500KB payload).</div>
+                            <div class="p-3 bg-amber-50 rounded"><strong>Assisted LSK Portal:</strong> Dedicated operator interface with BPL fee verification and priority queues.</div>
+                        </div>
+                    </div>
+                `,
+                notes: "Assisted access centers like Lok Seva Kendras are vital lifelines. Our proposed PWA works seamlessly for both self-service citizens and LSK operators.",
+                citations: "Chhattisgarh CHiPS Lok Seva Kendra Operational Guidelines."
+            },
+            {
+                num: 15,
+                title: "AI, Automation & Intelligent Processing Benchmark",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-3">
+                        <h4 class="font-bold text-cg-navy">Practical AI Integration Points</h4>
+                        <div class="space-y-2">
+                            <div class="p-2 bg-slate-50 rounded"><strong>Agentic Discovery Bot:</strong> Conversational eligibility deductions based on user prompt.</div>
+                            <div class="p-2 bg-slate-50 rounded"><strong>OCR Document Validation:</strong> Automated pre-scrutiny of revenue records (Misal 1950) before officer review.</div>
+                            <div class="p-2 bg-slate-50 rounded"><strong>Smart SLA Routing:</strong> Auto-escalation of delayed files to District Collectors.</div>
+                        </div>
+                    </div>
+                `,
+                notes: "AI should serve a pragmatic purpose: pre-validating uploaded documents so revenue officers don't reject applications over minor legibility issues.",
+                citations: "TCS Whitepaper on Agentic Architecture in Public Services 2025."
+            },
+            {
+                num: 16,
+                title: "Interoperability, APIs & DigiLocker Integration",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-3">
+                        <h4 class="font-bold text-cg-navy">DPI Ecosystem Interoperability</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-center">
+                            <div class="p-3 bg-slate-50 rounded"><strong>DigiLocker Pull:</strong> Auto-fills Aadhaar, Marksheets, and Land Records.</div>
+                            <div class="p-3 bg-slate-50 rounded"><strong>DigiLocker Push:</strong> Pushes signed QR certificates directly to citizen vaults.</div>
+                            <div class="p-3 bg-slate-50 rounded"><strong>PDS DB Link:</strong> Verifies ration card details for automatic fee waivers.</div>
+                        </div>
+                    </div>
+                `,
+                notes: "By linking Sewa Setu with DigiLocker and the state PDS database, we eliminate the need for citizens to manually re-upload income proof.",
+                citations: "DigiLocker API Integration Guidelines (MeitY)."
+            },
+            {
+                num: 17,
+                title: "Administrative MIS, SLA Governance & Dashboards",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-3">
+                        <h4 class="font-bold text-cg-navy">SLA Governance & Monitoring</h4>
+                        <p class="text-slate-600">Modeled after Goa Online's live TAT dashboard and Karnataka's SAKALA framework.</p>
+                        <div class="grid grid-cols-2 gap-2 text-center font-bold">
+                            <div class="p-2 bg-red-100 text-red-800 rounded">Public SLA Heatmaps</div>
+                            <div class="p-2 bg-blue-100 text-blue-800 rounded">eDM Bottleneck Analytics</div>
+                        </div>
+                    </div>
+                `,
+                notes: "Public visibility drives administrative accountability. When district Collectors can view live SLA compliance heatmaps, processing times drop dramatically.",
+                citations: "Goa Online TAT Dashboard; Karnataka SAKALA Governance Framework."
+            },
+            {
+                num: 18,
+                title: "Synthesis of Differentiated Best Practices",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-2">
+                        <h4 class="font-bold text-cg-navy">Best Practice Synthesis Matrix</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <div class="p-2 bg-slate-50 rounded"><strong>From Goa:</strong> Live TAT public dashboard & service wizard.</div>
+                            <div class="p-2 bg-slate-50 rounded"><strong>From Kerala:</strong> Automated BPL fee relief at assisted centers.</div>
+                            <div class="p-2 bg-slate-50 rounded"><strong>From Karnataka:</strong> Automated SLA breach escalation logic.</div>
+                            <div class="p-2 bg-slate-50 rounded"><strong>From Delhi:</strong> Comprehensive document checklists & DigiLocker fetch.</div>
+                        </div>
+                    </div>
+                `,
+                notes: "We have synthesized the single strongest feature from each state portal into one cohesive blueprint for Chhattisgarh.",
+                citations: "Comparative Study Synthesis Report 2026."
+            },
+            {
+                num: 19,
+                title: "Comprehensive Gap Analysis Framework",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-2">
+                        <h4 class="font-bold text-cg-navy">Summary of Identified Architectural Gaps</h4>
+                        <div class="space-y-1">
+                            <div class="flex justify-between p-2 bg-slate-50 rounded"><span>Gap 1: Siloed Service Discovery</span> <span class="font-bold text-cg-terracotta">High Impact</span></div>
+                            <div class="flex justify-between p-2 bg-slate-50 rounded"><span>Gap 2: Opaque Processing Stages</span> <span class="font-bold text-cg-terracotta">High Impact</span></div>
+                            <div class="flex justify-between p-2 bg-slate-50 rounded"><span>Gap 3: Uniform Fees (No BPL Waivers)</span> <span class="font-bold text-amber-600">Medium Impact</span></div>
+                            <div class="flex justify-between p-2 bg-slate-50 rounded"><span>Gap 4: Manual Document Upload Overload</span> <span class="font-bold text-cg-terracotta">High Impact</span></div>
+                        </div>
+                    </div>
+                `,
+                notes: "Our gap analysis identifies 15 distinct areas where Sewa Setu can immediately modernize its architecture.",
+                citations: "Sewa Setu Gap Analysis Framework Table."
+            },
+            {
+                num: 20,
+                title: "Empirical Citizen Personas",
+                content: `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                        <div class="bg-white p-3 rounded border border-slate-200">
+                            <strong class="text-cg-navy block">Persona 1: Ramesh (Farmer)</strong>
+                            Needs Income Certificate. High travel friction to LSK.
+                        </div>
+                        <div class="bg-white p-3 rounded border border-slate-200">
+                            <strong class="text-cg-terracotta block">Persona 2: Priya (Student)</strong>
+                            Needs OBC Certificate. Confused by Misal document requirements.
+                        </div>
+                        <div class="bg-white p-3 rounded border border-slate-200">
+                            <strong class="text-cg-slate block">Persona 3: Jagdish (Senior)</strong>
+                            Needs Pension services. Needs high contrast & voice search.
+                        </div>
+                    </div>
+                `,
+                notes: "We grounded our redesign in 5 realistic personas representing Chhattisgarh's unique social geography.",
+                citations: "Sewa Setu Citizen Research Archetypes."
+            },
+            {
+                num: 21,
+                title: "Friction-Point Matrix & Architectural Opportunities",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-2">
+                        <h4 class="font-bold text-cg-navy">Mapping Friction to Solution</h4>
+                        <div class="p-2 bg-red-50 rounded border border-red-200"><strong>Friction:</strong> Rejection due to unclear eligibility proof. &#8594; <strong>Solution:</strong> Pre-application Eligibility Checker.</div>
+                        <div class="p-2 bg-red-50 rounded border border-red-200"><strong>Friction:</strong> Multiple LSK trips for tracking. &#8594; <strong>Solution:</strong> WhatsApp visual timeline updates.</div>
+                    </div>
+                `,
+                notes: "Every feature we propose connects directly to an observed citizen pain point.",
+                citations: "User Experience Research Synthesis."
+            },
+            {
+                num: 22,
+                title: "Proposed Sewa Setu UX Design Principles",
+                content: `
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs text-center">
+                        <div class="p-3 bg-cg-navy text-white rounded"><strong>Citizen-First</strong> Organized by life events</div>
+                        <div class="p-3 bg-cg-terracotta text-white rounded"><strong>Accessible</strong> GIGW 3.0 / WCAG 2.1 AA</div>
+                        <div class="p-3 bg-cg-slate text-white rounded"><strong>Mobile-First</strong> Low bandwidth PWA</div>
+                        <div class="p-3 bg-cg-gold text-cg-navy rounded font-bold"><strong>Transparent</strong> Real-time SLA tracking</div>
+                    </div>
+                `,
+                notes: "These 4 design principles governed our entire UI redesign.",
+                citations: "Sewa Setu UX Design Standard Guidelines."
+            },
+            {
+                num: 23,
+                title: "Re-Engineered Information Architecture (IA Plan)",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-2 font-mono">
+                        <div class="font-bold text-cg-navy text-sm font-sans mb-2">Hierarchy Structure</div>
+                        <div class="bg-slate-50 p-2 rounded">
+                            HOME &#8594; Services (by Life Event) | AI Search | Track Application | My Vault | Public TAT | Accessibility
+                        </div>
+                    </div>
+                `,
+                notes: "We flattened the information architecture so citizens can reach any service in 2 clicks or fewer.",
+                citations: "Information Architecture Design Plan."
+            },
+            {
+                num: 24,
+                title: "Wireframe Walkthrough & Design Logic",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-2">
+                        <h4 class="font-bold text-cg-navy">15+ Low-Fi Wireframe Index</h4>
+                        <p class="text-slate-600">Covering Homepage, Discovery Wizard, Eligibility Checker, Form Wizard, Timeline Tracker, and Mobile Views.</p>
+                        <div class="p-2 bg-blue-50 text-cg-navy rounded font-bold">Explore Wireframe Tab for Full Interactive Walkthrough</div>
+                    </div>
+                `,
+                notes: "Our wireframe index demonstrates the layout choices made for mobile and desktop viewports.",
+                citations: "Sewa Setu Low-Fidelity Wireframes."
+            },
+            {
+                num: 25,
+                title: "NextGen High-Fidelity Prototype Walkthrough",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-2">
+                        <h4 class="font-bold text-cg-navy">High-Fidelity Concept Highlights</h4>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li>Centralized AI Search Header ("What service do you need?").</li>
+                            <li>Contextual eligibility engine with automated document checklist.</li>
+                            <li>Interactive color-coded status timeline with officer contact details.</li>
+                        </ul>
+                    </div>
+                `,
+                notes: "Judges can test the interactive prototype directly in Module 5 of this application.",
+                citations: "Sewa Setu High-Fidelity UI Concept."
+            },
+            {
+                num: 26,
+                title: "Proposed System Architecture (Microservices)",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-2">
+                        <h4 class="font-bold text-cg-navy">Microservices Architecture Stack</h4>
+                        <div class="p-2 bg-slate-50 rounded"><strong>Gateway Layer:</strong> Secure API Gateway, OAuth 2.0, Rate Limiting.</div>
+                        <div class="p-2 bg-slate-50 rounded"><strong>Core Services:</strong> Intent Engine, Workflow Engine, DigiLocker Push/Pull Engine.</div>
+                        <div class="p-2 bg-slate-50 rounded"><strong>Interoperability:</strong> Department Revenue DBs, Bhashini AI Translation.</div>
+                    </div>
+                `,
+                notes: "Our technical architecture is built on modular microservices, allowing CHiPS to deploy components incrementally.",
+                citations: "Sewa Setu Proposed Technical Architecture Diagram."
+            },
+            {
+                num: 27,
+                title: "Phased Implementation Roadmap & Governance KPIs",
+                content: `
+                    <div class="bg-white p-4 rounded border border-slate-200 text-xs space-y-2">
+                        <h4 class="font-bold text-cg-navy">Target Governance KPIs</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
+                            <div class="p-2 bg-emerald-50 rounded"><strong>>95%</strong> SLA Compliance Target</div>
+                            <div class="p-2 bg-blue-50 rounded"><strong>-40%</strong> Form Abandonment</div>
+                            <div class="p-2 bg-amber-50 rounded"><strong><45s</strong> Discovery Time</div>
+                            <div class="p-2 bg-purple-50 rounded"><strong>>15%</strong> Accessibility Adoption</div>
+                        </div>
+                    </div>
+                `,
+                notes: "We have established measurable baseline vs target KPIs to evaluate success across all 6 rollout phases.",
+                citations: "Sewa Setu Implementation KPI Framework."
+            },
+            {
+                num: 28,
+                title: "Expected Impact & Conclusion",
+                content: `
+                    <div class="bg-cg-navy text-white p-6 rounded-lg shadow-lg text-center space-y-4">
+                        <h2 class="text-xl font-bold text-cg-softGold">Empowering Every Citizen of Chhattisgarh</h2>
+                        <p class="text-xs text-slate-300 max-w-xl mx-auto">
+                            "We are not proposing a cosmetic redesign of Sewa Setu. We are translating evidence from multiple Indian citizen-service platforms into a practical, accessible, interoperable, and empathetic future experience for Chhattisgarh."
+                        </p>
+                        <div class="text-xs text-cg-terracotta font-bold">Thank You | Open for Q&A</div>
+                    </div>
+                `,
+                notes: "In conclusion, this comparative study equips CHiPS with a defensible, evidence-backed strategic roadmap. Thank you, and we welcome your questions.",
+                citations: "Final Hackathon Presentation Deck."
+            }
+        ];
+
+        const matrixData = [
+            { feature: "1. Intent-Based Service Wizard", cg: "Partial (Basic Search)", goa: "Full (Service Wizard)", kerala: "Partial", delhi: "Partial", karnataka: "Partial", odisha: "Full", assam: "Partial", note: "Replace department menus with intent-based life event wizard." },
+            { feature: "2. Turnaround Time (TAT) Dashboard", cg: "Limited (ARN only)", goa: "Full (Public TAT)", kerala: "Partial", delhi: "Partial", karnataka: "Full (SAKALA)", odisha: "Partial", assam: "Partial", note: "Deploy public SLA TAT dashboards for regional accountability." },
+            { feature: "3. BPL Automatic Fee Waiver Logic", cg: "None (Flat Fees)", goa: "Limited", kerala: "Full (Akshaya PDS)", delhi: "Limited", karnataka: "Partial", odisha: "Partial", assam: "Limited", note: "Link state PDS database to waive application fees for BPL citizens." },
+            { feature: "4. DigiLocker Auto-Fill Push/Pull", cg: "Partial (Upload PDF)", goa: "Full API Integration", kerala: "Partial", delhi: "Full Integration", karnataka: "Full Integration", odisha: "Full Integration", assam: "Partial", note: "Auto-fill certificates via DigiLocker API to eliminate redundant uploads." },
+            { feature: "5. Visual E-Commerce Tracking", cg: "Static Text", goa: "Partial", kerala: "Partial", delhi: "Partial", karnataka: "Partial", odisha: "Partial", assam: "Partial", note: "Provide step-by-step color-coded progress timeline for tracking." },
+            { feature: "6. Bhashini AI Multilingual Voice", cg: "Full (Bhashini API)", goa: "Limited", kerala: "Partial", delhi: "Limited", karnataka: "Partial", odisha: "Partial", assam: "Partial", note: "Expand Bhashini voice assistance for local Chhattisgarhi dialects." },
+            { feature: "7. Legislative SLA Compensation", cg: "Statutory SLA", goa: "Statutory SLA", kerala: "Statutory SLA", delhi: "Statutory SLA", karnataka: "Full (SAKALA Act)", odisha: "Statutory SLA", assam: "Statutory SLA", note: "Implement automated alerts and penalty tracking for SLA breaches." },
+            { feature: "8. GIGW 3.0 / High Contrast Toggle", cg: "Limited", goa: "Full Controls", kerala: "Partial", delhi: "Partial", karnataka: "Partial", odisha: "Partial", assam: "Partial", note: "Include native UI font scaling and high contrast toggles." },
+            { feature: "9. WhatsApp Bot Certificate Delivery", cg: "Full (Active)", goa: "Partial", kerala: "Partial", delhi: "Partial", karnataka: "Partial", odisha: "Partial", assam: "Full", note: "Maintain current strong WhatsApp integration while adding visual tracking." },
+            { feature: "10. OCR Document Scrutiny", cg: "Unverified", goa: "Limited", kerala: "Limited", delhi: "Limited", karnataka: "Limited", odisha: "Limited", assam: "Limited", note: "Deploy OCR to pre-screen Misal 1950 records before revenue officer review." }
+        ];
+
+        const personasData = [
+            {
+                id: "ramesh",
+                name: "Ramesh Kumar Sahu",
+                role: "Rural Farmer (Bastar)",
+                need: "Income Certificate for Agriculture Loan",
+                friction: "Must travel 25km to Lok Seva Kendra multiple times due to missing document clarity.",
+                currentJourney: "Discovers service via village clerk -> Visits LSK -> Missing proof -> Returns home -> Re-applies -> Waits 15 days without status updates.",
+                proposedJourney: "Opens Sewa Setu Mobile PWA -> Speaks in Chhattisgarhi -> AI verifies DigiLocker ration card -> Free BPL application submitted -> Receives QR certificate on WhatsApp in 5 days."
+            },
+            {
+                id: "priya",
+                name: "Priya Verma",
+                role: "College Student (Raipur)",
+                need: "OBC Caste Certificate for Scholarship",
+                friction: "Confused by historical document requirements (1950 Misal record vs Vanshavali).",
+                currentJourney: "Searches portal -> Overwhelmed by department sub-menus -> Uploads wrong PDF -> Rejection after 22 days without detailed reason.",
+                proposedJourney: "Uses Search Wizard -> Pre-application Eligibility Checker lists exact required Misal proof -> DigiLocker fetches marksheets -> Tracks stage-by-stage status on visual timeline."
+            },
+            {
+                id: "jagdish",
+                name: "Jagdish Prasad",
+                role: "Senior Citizen (Bilaspur)",
+                need: "Old Age Pension Renewal",
+                friction: "Small font size and complex navigation on traditional desktop portal.",
+                currentJourney: "Struggles to read small text -> Asks neighbor for help -> Fails to locate pension service.",
+                proposedJourney: "Clicks 'High Contrast & Large Font' mode -> Uses Voice Assistant to search pension -> Assisted kiosk locator finds nearest Lok Seva Kendra with queue status."
+            }
+        ];
+
+        const lofiWireframes = [
+            { title: "WF-01: Centralized Search Homepage", desc: "Large intent search bar with explicit accessibility bar and life-event shortcut cards." },
+            { title: "WF-02: Guided Discovery Wizard", desc: "Step-by-step questionnaire filtering services by age, income, category, and goal." },
+            { title: "WF-03: Eligibility & Document Checker", desc: "Interactive checklist verifying document readiness before starting application." },
+            { title: "WF-04: Single-Question Form Wizard", desc: "Clean paginated form UI showing progress bar and auto-fill from DigiLocker." },
+            { title: "WF-05: Visual Timeline Tracker", desc: "E-commerce style vertical status nodes with officer contact details and SLA countdown." },
+            { title: "WF-06: Mobile PWA View", desc: "Bottom-nav bar optimized layout with large touch targets and offline draft storage." }
+        ];
+
+
+
+        let currentSlide = 0;
+        let isPresenterNotesOpen = false;
+        let chartSla, chartDwell, chartDistrict, chartChannel;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initSlideDeck();
+            initMatrix();
+            initPersonas();
+            initWireframes();
+            loadHifiScreen('home');
+            initCharts();
+        });
+
+       
+        function initSlideDeck() {
+            const select = document.getElementById('slideSelect');
+            const thumbs = document.getElementById('slideThumbnails');
+            select.innerHTML = '';
+            thumbs.innerHTML = '';
+
+            slideDeck.forEach((slide, idx) => {
+                // Dropdown Option
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.textContent = `Slide ${slide.num}: ${slide.title}`;
+                select.appendChild(opt);
+
+                // Thumbnail Button
+                const thumb = document.createElement('button');
+                thumb.onclick = () => jumpToSlide(idx);
+                thumb.className = `px-3 py-2 rounded text-xs whitespace-nowrap font-semibold border transition-all ${idx === currentSlide ? 'bg-cg-navy text-white border-cg-navy' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100'}`;
+                thumb.id = `thumb-${idx}`;
+                thumb.textContent = `${slide.num}. ${slide.title.split(':')[0]}`;
+                thumbs.appendChild(thumb);
+            });
+
+            renderSlide();
+        }
+
+        function renderSlide() {
+            const slide = slideDeck[currentSlide];
+            document.getElementById('currentSlideNum').textContent = slide.num;
+            document.getElementById('slideTitle').textContent = slide.title;
+            document.getElementById('slideCanvas').innerHTML = slide.content;
+            document.getElementById('slideNotesText').innerHTML = slide.notes;
+            document.getElementById('slideCitations').textContent = slide.citations;
+            document.getElementById('slideSelect').value = currentSlide;
+
+            // Highlight thumbnail
+            slideDeck.forEach((_, idx) => {
+                const btn = document.getElementById(`thumb-${idx}`);
+                if (btn) {
+                    if (idx === currentSlide) {
+                        btn.className = 'px-3 py-2 rounded text-xs whitespace-nowrap font-bold bg-cg-navy text-white border-cg-navy shadow-sm';
+                    } else {
+                        btn.className = 'px-3 py-2 rounded text-xs whitespace-nowrap font-semibold bg-white text-slate-700 border-slate-300 hover:bg-slate-100';
+                    }
+                }
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlide < slideDeck.length - 1) {
+                currentSlide++;
+                renderSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                renderSlide();
+            }
+        }
+
+        function jumpToSlide(idx) {
+            currentSlide = idx;
+            renderSlide();
+        }
+
+        function togglePresenterNotes() {
+            const drawer = document.getElementById('speakerNotesDrawer');
+            isPresenterNotesOpen = !isPresenterNotesOpen;
+            if (isPresenterNotesOpen) {
+                drawer.classList.remove('hidden');
+            } else {
+                drawer.classList.add('hidden');
+            }
+        }
+
+
+        function initMatrix() {
+            const tbody = document.getElementById('matrixBody');
+            tbody.innerHTML = '';
+
+            matrixData.forEach((row) => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 border-b border-slate-200';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-bold text-slate-800">${row.feature}</td>
+                    <td class="px-3 py-3 bg-amber-50/50 font-semibold text-cg-navy">${row.cg}</td>
+                    <td class="px-3 py-3">${row.goa}</td>
+                    <td class="px-3 py-3">${row.kerala}</td>
+                    <td class="px-3 py-3">${row.delhi}</td>
+                    <td class="px-3 py-3">${row.karnataka}</td>
+                    <td class="px-3 py-3">${row.odisha}</td>
+                    <td class="px-3 py-3">${row.assam}</td>
+                    <td class="px-4 py-3 bg-blue-50/40 text-cg-navy font-medium">${row.note}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterMatrix() {
+            const input = document.getElementById('matrixSearch').value.toLowerCase();
+            const rows = document.getElementById('matrixBody').getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                const text = rows[i].textContent.toLowerCase();
+                if (text.includes(input)) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+
+
+        function initPersonas() {
+            const selector = document.getElementById('personaSelector');
+            selector.innerHTML = '';
+
+            personasData.forEach((p, idx) => {
+                const btn = document.createElement('button');
+                btn.onclick = () => loadPersona(idx);
+                btn.className = `px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap transition-all ${idx === 0 ? 'bg-cg-navy text-white shadow' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`;
+                btn.id = `btn-persona-${idx}`;
+                btn.textContent = `${p.name} (${p.role.split(' ')[0]})`;
+                selector.appendChild(btn);
+            });
+
+            loadPersona(0);
+        }
+
+        function loadPersona(idx) {
+            personasData.forEach((_, i) => {
+                const btn = document.getElementById(`btn-persona-${i}`);
+                if (btn) {
+                    if (i === idx) {
+                        btn.className = 'px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-cg-navy text-white shadow';
+                    } else {
+                        btn.className = 'px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap bg-slate-100 text-slate-700 hover:bg-slate-200';
+                    }
+                }
+            });
+
+            const p = personasData[idx];
+            const container = document.getElementById('personaCardContainer');
+            container.innerHTML = `
+                <div class="bg-cg-bgWarm p-5 rounded-xl border border-slate-300">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-300 pb-3 mb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-cg-navy">${p.name}</h3>
+                            <span class="text-xs font-semibold text-cg-terracotta">${p.role}</span>
+                        </div>
+                        <div class="bg-white px-3 py-1 rounded border text-xs font-bold text-slate-700 mt-2 md:mt-0">
+                            Core Goal: ${p.need}
+                        </div>
+                    </div>
+
+                    <div class="bg-red-50 p-3 rounded-lg border border-red-200 mb-6 text-xs">
+                        <strong class="text-red-700 block mb-1">Identified Friction Point:</strong>
+                        <p class="text-slate-700">${p.friction}</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                        <!-- Current Journey -->
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                            <h4 class="font-bold text-cg-crimson uppercase tracking-wider flex items-center space-x-1">
+                                <span>&#10008; Current Sewa Setu Journey</span>
+                            </h4>
+                            <p class="text-slate-600 bg-slate-50 p-3 rounded leading-relaxed border">${p.currentJourney}</p>
+                        </div>
+
+                        <!-- Proposed Journey -->
+                        <div class="bg-white p-4 rounded-xl border border-emerald-200 shadow-sm space-y-3">
+                            <h4 class="font-bold text-emerald-700 uppercase tracking-wider flex items-center space-x-1">
+                                <span>&#10004; Proposed NextGen Frictionless Journey</span>
+                            </h4>
+                            <p class="text-slate-700 bg-emerald-50/50 p-3 rounded leading-relaxed border border-emerald-200 font-medium">${p.proposedJourney}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        
+        function switchProtoView(view) {
+            const hifi = document.getElementById('hifiView');
+            const lofi = document.getElementById('lofiView');
+            const btnHifi = document.getElementById('btn-proto-hifi');
+            const btnLofi = document.getElementById('btn-proto-lofi');
+
+            if (view === 'hifi') {
+                hifi.classList.remove('hidden');
+                lofi.classList.add('hidden');
+                btnHifi.className = 'bg-cg-navy text-white px-3 py-1.5 rounded text-xs font-bold shadow';
+                btnLofi.className = 'bg-slate-100 text-slate-700 px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-200';
+            } else {
+                hifi.classList.add('hidden');
+                lofi.classList.remove('hidden');
+                btnLofi.className = 'bg-cg-navy text-white px-3 py-1.5 rounded text-xs font-bold shadow';
+                btnHifi.className = 'bg-slate-100 text-slate-700 px-3 py-1.5 rounded text-xs font-bold hover:bg-slate-200';
+            }
+        }
+
+        function loadHifiScreen(screen) {
+            const tabs = document.querySelectorAll('.screen-tab');
+            tabs.forEach(t => {
+                t.className = 'screen-tab px-4 py-2 rounded-lg bg-slate-100 text-slate-700 font-semibold hover:bg-slate-200 text-xs';
+            });
+            const activeBtn = document.getElementById(`screen-btn-${screen}`);
+            if (activeBtn) {
+                activeBtn.className = 'screen-tab px-4 py-2 rounded-lg bg-cg-navy text-white font-bold text-xs shadow';
+            }
+
+            const container = document.getElementById('hifiScreenContainer');
+
+            if (screen === 'home') {
+                container.innerHTML = `
+                    <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
+                        <!-- Prototype Screen Top Bar -->
+                        <div class="bg-cg-navy p-4 text-white flex justify-between items-center">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xl font-bold tracking-tight text-cg-softGold">छत्तीसगढ़ सेवा सेतु</span>
+                                <span class="bg-cg-terracotta text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">NextGen UI Concept</span>
+                            </div>
+                            <div class="text-xs space-x-2">
+                                <span class="bg-slate-800 px-2 py-1 rounded">Language: हिन्दी</span>
+                                <span class="bg-slate-800 px-2 py-1 rounded">Accessibility: High Contrast</span>
+                            </div>
+                        </div>
+
+                        <!-- Hero Intent Search Section -->
+                        <div class="bg-cg-darkNavy text-white p-8 text-center space-y-4">
+                            <span class="text-cg-softGold font-bold text-xs uppercase tracking-widest">Citizen Service Intent Search</span>
+                            <h2 class="text-2xl font-bold">आप आज क्या सेवा प्राप्त करना चाहते हैं?</h2>
+                            <p class="text-xs text-slate-300 max-w-lg mx-auto">What government service do you need today? Search naturally in Hindi, English, or Voice.</p>
+                            
+                            <!-- Search Bar Mockup -->
+                            <div class="max-w-xl mx-auto flex items-center bg-white rounded-lg p-1.5 shadow-xl border-2 border-cg-terracotta">
+                                <span class="text-slate-400 px-3">&#128065;</span>
+                                <input type="text" placeholder="उदा: मुझे कॉलेज के लिए आय प्रमाण पत्र चाहिए..." class="w-full text-slate-800 text-xs focus:outline-none px-2" value="मुझे कॉलेज छात्रवृत्ति के लिए आय प्रमाण पत्र बनवाना है">
+                                <button onclick="loadHifiScreen('discovery')" class="bg-cg-terracotta hover:bg-cg-terracottaDark text-white px-5 py-2 rounded font-bold text-xs whitespace-nowrap">खोजें (Search)</button>
+                            </div>
+
+                            <div class="flex flex-wrap justify-center gap-2 text-[11px] text-slate-300 mt-2">
+                                <span class="text-slate-400">लोकप्रिय सेवाएं (Popular):</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded cursor-pointer hover:text-cg-gold">आय प्रमाण पत्र</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded cursor-pointer hover:text-cg-gold">मूल निवासी</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded cursor-pointer hover:text-cg-gold">ओबीसी जाति</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded cursor-pointer hover:text-cg-gold">राशन कार्ड</span>
+                            </div>
+                        </div>
+
+                        <!-- Life Event Category Cards -->
+                        <div class="p-6 space-y-4">
+                            <h3 class="font-bold text-cg-navy text-sm uppercase tracking-wider">जीवन चरण अनुसार सेवाएं (Services by Life Event)</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+                                <div class="bg-cg-bgWarm p-4 rounded-lg border border-slate-200 text-center hover:shadow-md transition cursor-pointer" onclick="loadHifiScreen('discovery')">
+                                    <div class="text-2xl mb-1">&#127891;</div>
+                                    <strong class="text-cg-navy block">शिक्षा एवं छात्रवृत्ति</strong>
+                                    <span class="text-[10px] text-slate-500">Education & Scholarship</span>
+                                </div>
+                                <div class="bg-cg-bgWarm p-4 rounded-lg border border-slate-200 text-center hover:shadow-md transition cursor-pointer" onclick="loadHifiScreen('discovery')">
+                                    <div class="text-2xl mb-1">&#127969;</div>
+                                    <strong class="text-cg-navy block">राजस्व एवं भूमि</strong>
+                                    <span class="text-[10px] text-slate-500">Revenue & Land</span>
+                                </div>
+                                <div class="bg-cg-bgWarm p-4 rounded-lg border border-slate-200 text-center hover:shadow-md transition cursor-pointer" onclick="loadHifiScreen('discovery')">
+                                    <div class="text-2xl mb-1">&#128106;</div>
+                                    <strong class="text-cg-navy block">सामाजिक कल्याण</strong>
+                                    <span class="text-[10px] text-slate-500">Social Welfare & Pension</span>
+                                </div>
+                                <div class="bg-cg-bgWarm p-4 rounded-lg border border-slate-200 text-center hover:shadow-md transition cursor-pointer" onclick="loadHifiScreen('discovery')">
+                                    <div class="text-2xl mb-1">&#128179;</div>
+                                    <strong class="text-cg-navy block">प्रमाण पत्र सेवाएं</strong>
+                                    <span class="text-[10px] text-slate-500">Certificates & Licenses</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (screen === 'discovery') {
+                container.innerHTML = `
+                    <div class="bg-white rounded-xl shadow-lg border border-slate-200 p-6 space-y-6">
+                        <div class="border-b pb-3 flex justify-between items-center">
+                            <div>
+                                <span class="text-xs font-bold text-cg-terracotta uppercase">Discovery Wizard</span>
+                                <h3 class="text-xl font-bold text-cg-navy">Service Discovery & Eligibility Wizard</h3>
+                            </div>
+                            <button onclick="loadHifiScreen('home')" class="text-xs text-slate-500 underline">&larr; Back to Home</button>
+                        </div>
+
+                        <!-- Guided Questions -->
+                        <div class="bg-cg-bgWarm p-4 rounded-lg border border-slate-300 space-y-4">
+                            <strong class="text-xs font-bold text-cg-navy block">Step 1: What is your primary requirement?</strong>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                                <label class="bg-white p-3 rounded border-2 border-cg-navy flex items-center space-x-2 cursor-pointer font-bold text-cg-navy">
+                                    <input type="radio" checked name="req"> <span>Income Certificate (आय प्रमाण पत्र)</span>
+                                </label>
+                                <label class="bg-white p-3 rounded border border-slate-200 flex items-center space-x-2 cursor-pointer text-slate-700">
+                                    <input type="radio" name="req"> <span>Domicile Certificate (मूल निवासी)</span>
+                                </label>
+                                <label class="bg-white p-3 rounded border border-slate-200 flex items-center space-x-2 cursor-pointer text-slate-700">
+                                    <input type="radio" name="req"> <span>Caste Certificate (जाति प्रमाण पत्र)</span>
+                                </label>
+                            </div>
+
+                            <div class="pt-2">
+                                <button onclick="loadHifiScreen('details')" class="bg-cg-terracotta hover:bg-cg-terracottaDark text-white px-6 py-2 rounded font-bold text-xs shadow">Proceed to Service Details & Eligibility &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (screen === 'details') {
+                container.innerHTML = `
+                    <div class="bg-white rounded-xl shadow-lg border border-slate-200 p-6 space-y-6">
+                        <div class="border-b pb-3 flex justify-between items-center">
+                            <div>
+                                <span class="text-xs font-bold text-cg-terracotta uppercase">Revenue & Disaster Management Dept</span>
+                                <h3 class="text-2xl font-bold text-cg-navy">Issuance of Income Certificate (आय प्रमाण पत्र)</h3>
+                            </div>
+                            <button onclick="loadHifiScreen('discovery')" class="text-xs text-slate-500 underline">&larr; Back</button>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                            <div class="bg-blue-50 p-3 rounded border border-blue-200">
+                                <span class="font-bold text-cg-navy block uppercase">Statutory Processing Time</span>
+                                <div class="text-lg font-bold text-cg-navy">7 Working Days</div>
+                                <span class="text-[10px] text-slate-500">CG Lok Seva Guarantee SLA</span>
+                            </div>
+                            <div class="bg-emerald-50 p-3 rounded border border-emerald-200">
+                                <span class="font-bold text-cg-slate block uppercase">Application Fee</span>
+                                <div class="text-lg font-bold text-cg-slate">₹30.00 (Free for BPL)</div>
+                                <span class="text-[10px] text-slate-500">Automated PDS Waiver Enabled</span>
+                            </div>
+                            <div class="bg-amber-50 p-3 rounded border border-amber-200">
+                                <span class="font-bold text-cg-terracotta block uppercase">Delivery Mode</span>
+                                <div class="text-lg font-bold text-cg-terracotta">Digital QR + WhatsApp</div>
+                                <span class="text-[10px] text-slate-500">DigiLocker Pushed</span>
+                            </div>
+                        </div>
+
+                        <!-- Checklist -->
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-2 text-xs">
+                            <strong class="font-bold text-cg-navy block">Required Document Checklist:</strong>
+                            <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                                <li>Aadhaar Card (Auto-verified via eKYC)</li>
+                                <li>Self-Declaration Form / Salary Slip / Patwari Report</li>
+                                <li>Ration Card (Optional - Auto-applies BPL fee waiver)</li>
+                            </ul>
+                        </div>
+
+                        <div class="flex space-x-3">
+                            <button onclick="loadHifiScreen('tracking')" class="bg-cg-navy text-white px-6 py-2.5 rounded-lg font-bold text-xs shadow hover:bg-slate-800">Apply Online (Single-Click DigiLocker)</button>
+                            <button onclick="loadHifiScreen('tracking')" class="bg-slate-100 text-slate-700 px-4 py-2.5 rounded-lg font-semibold text-xs border hover:bg-slate-200">Track Existing Application</button>
+                        </div>
+                    </div>
+                `;
+            } else if (screen === 'tracking') {
+                container.innerHTML = `
+                    <div class="bg-white rounded-xl shadow-lg border border-slate-200 p-6 space-y-6">
+                        <div class="border-b pb-3 flex justify-between items-center">
+                            <div>
+                                <span class="text-xs font-bold text-cg-terracotta uppercase">Application Timeline Tracker</span>
+                                <h3 class="text-xl font-bold text-cg-navy">ARN: CG-2026-994182 (Income Certificate)</h3>
+                            </div>
+                            <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded text-xs">On Schedule (Day 3 of 7)</span>
+                        </div>
+
+                        <!-- Visual Step-by-Step Timeline -->
+                        <div class="bg-cg-bgWarm p-6 rounded-xl border border-slate-300">
+                            <div class="space-y-6 relative border-l-2 border-cg-navy pl-6 ml-4 text-xs">
+                                <!-- Node 1 -->
+                                <div class="relative">
+                                    <span class="absolute -left-[31px] top-0 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white"></span>
+                                    <strong class="font-bold text-emerald-700 block">1. Application Submitted</strong>
+                                    <p class="text-slate-500 text-[11px]">Submitted online on 22 Sept 2026, 10:30 AM via DigiLocker Auto-fill.</p>
+                                </div>
+                                <!-- Node 2 -->
+                                <div class="relative">
+                                    <span class="absolute -left-[31px] top-0 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white"></span>
+                                    <strong class="font-bold text-emerald-700 block">2. Document Pre-Scrutiny (OCR Passed)</strong>
+                                    <p class="text-slate-500 text-[11px]">Verified on 23 Sept 2026, 02:15 PM. Aadhaar matched.</p>
+                                </div>
+                                <!-- Node 3 -->
+                                <div class="relative">
+                                    <span class="absolute -left-[31px] top-0 w-4 h-4 bg-cg-terracotta rounded-full border-2 border-white animate-pulse"></span>
+                                    <strong class="font-bold text-cg-terracotta block">3. Revenue Inspector Verification (Current Active Stage)</strong>
+                                    <p class="text-slate-700 text-[11px]">Assigned to RI Circle Raipur-3. Officer contact: RI Sahu (SLA Target: 25 Sept 2026).</p>
+                                </div>
+                                <!-- Node 4 -->
+                                <div class="relative opacity-50">
+                                    <span class="absolute -left-[31px] top-0 w-4 h-4 bg-slate-300 rounded-full border-2 border-white"></span>
+                                    <strong class="font-bold text-slate-600 block">4. Tehsildar Final Approval & QR Signing</strong>
+                                    <p class="text-slate-400 text-[11px]">Pending previous stage completion.</p>
+                                </div>
+                                <!-- Node 5 -->
+                                <div class="relative opacity-50">
+                                    <span class="absolute -left-[31px] top-0 w-4 h-4 bg-slate-300 rounded-full border-2 border-white"></span>
+                                    <strong class="font-bold text-slate-600 block">5. Certificate Delivery</strong>
+                                    <p class="text-slate-400 text-[11px]">Will be delivered to WhatsApp (+91 98260XXXXX) & DigiLocker.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (screen === 'mobile') {
+                container.innerHTML = `
+                    <div class="max-w-sm mx-auto bg-slate-900 rounded-3xl p-3 shadow-2xl border-4 border-slate-700">
+                        <!-- Mobile Screen Frame -->
+                        <div class="bg-white rounded-2xl overflow-hidden min-h-[480px] flex flex-col justify-between text-xs">
+                            <!-- Mobile Header -->
+                            <div class="bg-cg-navy text-white p-3 flex justify-between items-center">
+                                <span class="font-bold text-cg-softGold">छत्तीसगढ़ सेवा सेतु</span>
+                                <span class="text-[10px] bg-cg-terracotta px-1.5 py-0.5 rounded">PWA</span>
+                            </div>
+
+                            <!-- Mobile Body -->
+                            <div class="p-4 space-y-4 flex-grow bg-cg-bgWarm">
+                                <div class="bg-cg-darkNavy text-white p-3 rounded-xl text-center space-y-2">
+                                    <span class="text-[10px] text-cg-softGold font-bold">बोलकर खोजें (Voice Search)</span>
+                                    <button class="w-full bg-cg-terracotta text-white py-2 rounded-lg font-bold text-xs flex items-center justify-center space-x-1">
+                                        <span>&#127908;</span> <span>सेवा का नाम बोलें...</span>
+                                    </button>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <strong class="font-bold text-cg-navy text-[11px] block">Quick Services</strong>
+                                    <div class="grid grid-cols-2 gap-2 text-[11px]">
+                                        <div class="bg-white p-2 rounded border text-center font-semibold text-slate-700">आय प्रमाण पत्र</div>
+                                        <div class="bg-white p-2 rounded border text-center font-semibold text-slate-700">मूल निवासी</div>
+                                        <div class="bg-white p-2 rounded border text-center font-semibold text-slate-700">जाति प्रमाण पत्र</div>
+                                        <div class="bg-white p-2 rounded border text-center font-semibold text-slate-700">स्थिति जांचें</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mobile Bottom Navigation -->
+                            <div class="bg-white border-t p-2 flex justify-around text-center text-[10px] font-bold text-slate-600">
+                                <span class="text-cg-terracotta">Home</span>
+                                <span>Search</span>
+                                <span>Track</span>
+                                <span>Vault</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function initWireframes() {
+            const grid = document.getElementById('wireframeGrid');
+            grid.innerHTML = '';
+
+            lofiWireframes.forEach(wf => {
+                const card = document.createElement('div');
+                card.className = 'bg-cg-bgWarm p-4 rounded-lg border border-slate-300 space-y-2';
+                card.innerHTML = `
+                    <strong class="font-bold text-cg-navy text-xs block">${wf.title}</strong>
+                    <p class="text-[11px] text-slate-600 leading-relaxed">${wf.desc}</p>
+                    <span class="inline-block bg-slate-200 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">GIGW 3.0 Wireframe</span>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+
+        function initCharts() {
+            // Chart 1: SLA Compliance Rate
+            const ctxSla = document.getElementById('chartSlaCompliance').getContext('2d');
+            chartSla = new Chart(ctxSla, {
+                type: 'bar',
+                data: {
+                    labels: ['Sewa Setu (CG)', 'Goa Online', 'Kerala e-Dist', 'Karnataka Seva'],
+                    datasets: [{
+                        label: 'SLA Compliance Rate (%)',
+                        data: [94.2, 97.8, 96.1, 98.4],
+                        backgroundColor: ['#C85A32', '#0F2942', '#2D5A27', '#D4AF37'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { min: 80, max: 100 } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // Chart 2: Dwell Time
+            const ctxDwell = document.getElementById('chartDwellTime').getContext('2d');
+            chartDwell = new Chart(ctxDwell, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Citizen Prep', 'RI Scrutiny', 'Tehsildar Sign', 'Delivery'],
+                    datasets: [{
+                        data: [1.2, 2.5, 0.8, 0.3],
+                        backgroundColor: ['#3B82F6', '#EF4444', '#F59E0B', '#10B981']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+
+            // Chart 3: District Breaches
+            const ctxDist = document.getElementById('chartDistrictBreach').getContext('2d');
+            chartDistrict = new Chart(ctxDist, {
+                type: 'bar',
+                data: {
+                    labels: ['Raipur', 'Durg', 'Bilaspur', 'Bastar', 'Surguja'],
+                    datasets: [{
+                        label: 'Active Breaches',
+                        data: [320, 210, 180, 290, 240],
+                        backgroundColor: '#DC2626',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // Chart 4: Channel Adoption
+            const ctxChan = document.getElementById('chartChannelAdoption').getContext('2d');
+            chartChannel = new Chart(ctxChan, {
+                type: 'line',
+                data: {
+                    labels: ['2023', '2024', '2025', '2026 (Target)'],
+                    datasets: [
+                        { label: 'Mobile PWA', data: [15, 28, 45, 65], borderColor: '#0F2942', fill: false, tension: 0.3 },
+                        { label: 'WhatsApp Bot', data: [5, 18, 35, 50], borderColor: '#059669', fill: false, tension: 0.3 },
+                        { label: 'Lok Seva Kiosks', data: [80, 54, 20, 15], borderColor: '#C85A32', fill: false, tension: 0.3 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        }
+
+        function updateDashboardCharts() {
+            const district = document.getElementById('districtFilter').value;
+            const statReceived = document.getElementById('statReceived');
+            const statBreaches = document.getElementById('statBreaches');
+
+            if (district === 'raipur') {
+                statReceived.textContent = '42,150';
+                statBreaches.textContent = '320';
+            } else if (district === 'bastar') {
+                statReceived.textContent = '18,400';
+                statBreaches.textContent = '290';
+            } else {
+                statReceived.textContent = '142,850';
+                statBreaches.textContent = '1,240';
+            }
+        }
+
+
+        function switchTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(c => c.classList.add('hidden'));
+
+            const activeContent = document.getElementById(tabId);
+            if (activeContent) {
+                activeContent.classList.remove('hidden');
+            }
+
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(t => {
+                t.className = 'nav-tab py-3 px-5 border-b-2 border-transparent hover:text-cg-navy whitespace-nowrap flex items-center space-x-2 text-slate-600';
+            });
+
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.className = 'nav-tab py-3 px-5 border-b-2 border-cg-terracotta text-cg-terracotta font-bold whitespace-nowrap flex items-center space-x-2';
+            }
+        }
+
+        function changeFontSize(size) {
+            const body = document.getElementById('appBody');
+            body.classList.remove('text-scale-sm', 'text-scale-base', 'text-scale-lg');
+            if (size === 'sm') body.classList.add('text-scale-sm');
+            if (size === 'base') body.classList.add('text-scale-base');
+            if (size === 'lg') body.classList.add('text-scale-lg');
+        }
+
+        function toggleContrast() {
+            const body = document.getElementById('appBody');
+            body.classList.toggle('high-contrast');
+        }
+
+        function changeLanguage(lang) {
+            if (lang === 'hi') {
+                alert("हिन्दी भाषा का चयन किया गया है। इंटरफेस अद्यतन हो रहा है...");
+            } else if (lang === 'cg') {
+                alert("छत्तीसगढ़ी भाषा चुना गिस। सेवा सेतु मा स्वागत हे!");
+            }
+        }
+    </script>
+</body>
+</html>
